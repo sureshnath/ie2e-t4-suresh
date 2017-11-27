@@ -33,6 +33,22 @@ public class ConfigurableFileInfoDaoTest {
     }
 
     @Test
+    public void testNonExistingConfigDirectory() {
+        System.setProperty(ConfigurableFileInfoDao.SYS_PROP_CONF_DIR, TestConfig.NON_EXISTING_FOLDER);
+        List<FileInfo> result = instance.findAll();
+        assertNotNull(result);
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testNoEnvVar() {
+        System.clearProperty(ConfigurableFileInfoDao.SYS_PROP_CONF_DIR);
+        List<FileInfo> result = instance.findAll();
+        assertNotNull(result);
+        assertEquals(0, result.size());
+    }
+
+    @Test
     public void testFindAll() {
         List<FileInfo> result = instance.findAll();
         assertEquals(4, result.size());
