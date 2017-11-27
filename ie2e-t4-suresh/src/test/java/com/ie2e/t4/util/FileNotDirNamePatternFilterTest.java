@@ -17,11 +17,18 @@ import org.junit.Before;
 public class FileNotDirNamePatternFilterTest {
 
     File baseFolder ;
+
+    /**
+     *
+     */
     @Before
     public void init(){
         baseFolder = new File(TestConfig.FILE_NAME_FILTER_TEST_FOLDER);
     }
     
+    /**
+     *
+     */
     @Test
     public void testGetAllFilesMatcher() {
         File[] files = baseFolder.listFiles(FileNotDirNamePatternFilter.getAllFilesMatcher());
@@ -29,6 +36,9 @@ public class FileNotDirNamePatternFilterTest {
         assertEquals(TestConfig.ALL_FILES_COUNT, files.length);
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetExcelFilesMatcher() {
         String[] files = baseFolder.list(FileNotDirNamePatternFilter.getExcelFilesMatcher());
@@ -36,6 +46,9 @@ public class FileNotDirNamePatternFilterTest {
         assertEquals(TestConfig.EXCEL_FILES_COUNT, files.length);
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetCsvFilesMatcher() {
         String[] files = baseFolder.list(FileNotDirNamePatternFilter.getCsvFilesMatcher());

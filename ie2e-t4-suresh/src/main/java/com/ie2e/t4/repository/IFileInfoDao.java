@@ -14,7 +14,21 @@ import java.util.List;
  */
 public interface IFileInfoDao {
 
+    /**
+     *
+     * @return
+     */
     public List<FileInfo> findAll();
+
+    /**
+     *
+     * @return
+     */
     public List<FileInfo> findMimeExcel();
+
+    /**
+     *
+     * @return
+     */
     public List<FileInfo> findMimeCsv();
 }

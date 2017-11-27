@@ -25,7 +25,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- *
+ * This is a functional test using Selenium that scans the directory pointed by 
+ * {@link TestConfig#FILE_NAME_FILTER_TEST_FOLDER} for all CSV files and
+ * check the vehicle registrations, their make and model in against DVLA website
+ * <p>
+ * CSV File format <BR>
+ * Line 1 : header - registration,make, color<BR>
+ * Line 2-n: data 
+ * </p>
+ * 
+ * <p>
+ * Selenium tests runs against Chrome and can be configured using {@link ChromeDriverService#CHROME_DRIVER_EXE_PROPERTY}
  * @author Suresh
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,6 +60,10 @@ public class VehicleRegSeleniumTest {
     private boolean acceptNextAlert = true;
     private final StringBuffer verificationErrors = new StringBuffer();
 
+    /**
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public static void createAndStartService() throws Exception {
         if (System.getProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY) == null) {
@@ -63,11 +76,17 @@ public class VehicleRegSeleniumTest {
         service.start();
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void createAndStopService() {
         service.stop();
     }
 
+    /**
+     *
+     */
     @Before
     public void createDriver() {
         driver = new RemoteWebDriver(service.getUrl(),
@@ -75,6 +94,10 @@ public class VehicleRegSeleniumTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
         driver.quit();
@@ -84,13 +107,20 @@ public class VehicleRegSeleniumTest {
         }
     }
 
+    /**
+     *
+     */
     @Before
     public void setupEnvVar() {
         System.setProperty(ConfigurableFileInfoDao.SYS_PROP_CONF_DIR, TestConfig.FILE_NAME_FILTER_TEST_FOLDER);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
-    public void testFindMimeCsv() throws Exception {
+    public void testVehicleRegCSVs() throws Exception {
         List<FileInfo> result = instance.findMimeCsv();
         assertEquals(TestConfig.CSV_FILES_COUNT, result.size());
         for (FileInfo info : result) {

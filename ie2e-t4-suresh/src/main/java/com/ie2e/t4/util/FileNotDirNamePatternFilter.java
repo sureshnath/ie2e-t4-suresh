@@ -20,6 +20,10 @@ public class FileNotDirNamePatternFilter implements FilenameFilter{
     
     private final String pattern;
     
+    /**
+     *
+     * @param pattern
+     */
     public FileNotDirNamePatternFilter(String pattern){
         this.pattern = pattern;
     }
@@ -29,12 +33,26 @@ public class FileNotDirNamePatternFilter implements FilenameFilter{
         return f.isFile() && name.matches(pattern);
     }
     
+    /**
+     *
+     * @return
+     */
     public static FileNotDirNamePatternFilter getAllFilesMatcher(){
         return new FileNotDirNamePatternFilter(ALL_FILES_PATTERN);
     }
+
+    /**
+     *
+     * @return
+     */
     public static FileNotDirNamePatternFilter getExcelFilesMatcher(){
         return new FileNotDirNamePatternFilter(EXCEL_FILES_PATTERN);
     }
+
+    /**
+     *
+     * @return
+     */
     public static FileNotDirNamePatternFilter getCsvFilesMatcher(){
         return new FileNotDirNamePatternFilter(CSV_FILES_PATTERN);
     }

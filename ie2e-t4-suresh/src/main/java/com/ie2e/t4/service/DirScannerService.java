@@ -21,15 +21,27 @@ public class DirScannerService {
     @Autowired
     private IFileInfoDao dao;
 
+    /**
+     *
+     * @return
+     */
     public List<FileInfo> findAll() {
         return dao.findAll();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<FileInfo> findMimeExcel() {
         return dao.findMimeExcel();
 
     }
 
+    /**
+     *
+     * @return
+     */
     public List<FileInfo> findMimeCsv(){
         return dao.findMimeCsv();
     }

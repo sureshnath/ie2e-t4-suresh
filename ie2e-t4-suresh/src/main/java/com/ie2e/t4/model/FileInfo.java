@@ -17,10 +17,18 @@ public class FileInfo {
     private String extension;
     private String fullPath;
 
+    /**
+     *
+     * @param fullPath
+     */
     public void setFullPath(String fullPath) {
         this.fullPath = fullPath;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFullPath() {
         return fullPath;
     }

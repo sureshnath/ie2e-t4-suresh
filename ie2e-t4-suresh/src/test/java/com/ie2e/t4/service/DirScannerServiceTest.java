@@ -28,23 +28,35 @@ public class DirScannerServiceTest {
     @Autowired
     private DirScannerService instance;
 
+    /**
+     *
+     */
     @Before
     public void setupEnvVar(){
         System.setProperty(ConfigurableFileInfoDao.SYS_PROP_CONF_DIR, TestConfig.FILE_NAME_FILTER_TEST_FOLDER);
     }
 
+    /**
+     *
+     */
     @Test
     public void testFindAll() {
         List<FileInfo> result = instance.findAll();
         assertEquals(TestConfig.ALL_FILES_COUNT, result.size());
     }
 
+    /**
+     *
+     */
     @Test
     public void testFindMimeExcel() {
         List<FileInfo> result = instance.findMimeExcel();
         assertEquals(TestConfig.EXCEL_FILES_COUNT, result.size());
     }
 
+    /**
+     *
+     */
     @Test
     public void testFindMimeCsv() {
         List<FileInfo> result = instance.findMimeCsv();

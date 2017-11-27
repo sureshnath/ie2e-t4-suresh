@@ -9,11 +9,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Test model bean FileInfo
  * @author Suresh
  */
 public class FileInfoTest {
     
+    /**
+     * test set/get on name
+     */
     @Test
     public void testSetGetName() {
         FileInfo instance = new FileInfo();
@@ -23,6 +26,9 @@ public class FileInfoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * test set/get on mime
+     */
     @Test
     public void testSetGetMimeType() {
         FileInfo instance = new FileInfo();
@@ -32,6 +38,9 @@ public class FileInfoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * test set/get on size
+     */
     @Test
     public void testSetGetSize() {
         FileInfo instance = new FileInfo();
@@ -41,6 +50,9 @@ public class FileInfoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * test set/get on extension
+     */
     @Test
     public void testSetGetExtension() {
         FileInfo instance = new FileInfo();
@@ -50,6 +62,9 @@ public class FileInfoTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * test set/get on fullpath
+     */
     public void testSetGetFullPath() {
         FileInfo instance = new FileInfo();
         String expResult = "path";
