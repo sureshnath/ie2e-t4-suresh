@@ -20,7 +20,7 @@ public class FileNotDirNamePatternFilterTest {
     File baseFolder ;
     @Before
     public void init(){
-        baseFolder = new File("src/test/resources/fileNameFilterTestResourceFolder");
+        baseFolder = new File(TestConfig.FILE_NAME_FILTER_TEST_FOLDER);
     }
     
     @Test
