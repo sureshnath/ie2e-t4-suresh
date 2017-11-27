@@ -36,19 +36,19 @@ public class DirScannerServiceTest {
     @Test
     public void testFindAll() {
         List<FileInfo> result = instance.findAll();
-        assertEquals(4, result.size());
+        assertEquals(TestConfig.ALL_FILES_COUNT, result.size());
     }
 
     @Test
     public void testFindMimeExcel() {
         List<FileInfo> result = instance.findMimeExcel();
-        assertEquals(2, result.size());
+        assertEquals(TestConfig.EXCEL_FILES_COUNT, result.size());
     }
 
     @Test
     public void testFindMimeCsv() {
         List<FileInfo> result = instance.findMimeCsv();
-        assertEquals(1, result.size());
+        assertEquals(TestConfig.CSV_FILES_COUNT, result.size());
     }
     
 }

@@ -6,7 +6,6 @@
 package com.ie2e.t4.util;
 
 import java.io.File;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -27,21 +26,21 @@ public class FileNotDirNamePatternFilterTest {
     public void testGetAllFilesMatcher() {
         File[] files = baseFolder.listFiles(FileNotDirNamePatternFilter.getAllFilesMatcher());
         assertNotNull(files);
-        assertEquals(4, files.length);
+        assertEquals(TestConfig.ALL_FILES_COUNT, files.length);
     }
 
     @Test
     public void testGetExcelFilesMatcher() {
         String[] files = baseFolder.list(FileNotDirNamePatternFilter.getExcelFilesMatcher());
         assertNotNull(files);
-        assertEquals(2, files.length);
+        assertEquals(TestConfig.EXCEL_FILES_COUNT, files.length);
     }
 
     @Test
     public void testGetCsvFilesMatcher() {
         String[] files = baseFolder.list(FileNotDirNamePatternFilter.getCsvFilesMatcher());
         assertNotNull(files);
-        assertEquals(1, files.length);
+        assertEquals(TestConfig.CSV_FILES_COUNT, files.length);
     }
     
 }
