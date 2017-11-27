@@ -11,6 +11,7 @@ import java.io.File;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,29 @@ import org.springframework.stereotype.Repository;
 public class ConfigurableFileInfoDao implements IFileInfoDao {
 
     private static final Logger LOG = Logger.getLogger(ConfigurableFileInfoDao.class);
+
+    /**
+     *
+     */
     public static final String SYS_PROP_CONF_DIR = "com.ie2e.t4.conf.dir";
 
+    private final MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
+    
     @Autowired
     private Environment env;
 
+    /**
+     *
+     * @return
+     */
     public Environment getEnv() {
         return env;
     }
 
+    /**
+     *
+     * @param env
+     */
     public void setEnv(Environment env) {
         this.env = env;
     }
@@ -48,7 +63,7 @@ public class ConfigurableFileInfoDao implements IFileInfoDao {
                 fileInfo.setName(file.getName());
                 fileInfo.setSize(file.length());
                 fileInfo.setExtension(FilenameUtils.getExtension(file.getName()));
-                fileInfo.setMimeType(URLConnection.guessContentTypeFromName(file.getName()));
+                fileInfo.setMimeType(fileTypeMap.getContentType(file));
                 fileInfo.setFullPath(file.getAbsolutePath());
                 fileInfos.add(fileInfo);
             }
@@ -58,16 +73,28 @@ public class ConfigurableFileInfoDao implements IFileInfoDao {
         return fileInfos;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<FileInfo> findAll() {
        return listFileInfos(FileNotDirNamePatternFilter.getAllFilesMatcher());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<FileInfo> findMimeExcel() {
        return listFileInfos(FileNotDirNamePatternFilter.getExcelFilesMatcher());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<FileInfo> findMimeCsv() {
        return listFileInfos(FileNotDirNamePatternFilter.getCsvFilesMatcher());
