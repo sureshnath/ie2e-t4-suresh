@@ -15,6 +15,31 @@ public class FileInfo {
     private String mimeType;
     private Long size;
     private String extension;
+    private String fullPath;
+
+    public void setFullPath(String fullPath) {
+        this.fullPath = fullPath;
+    }
+
+    public String getFullPath() {
+        return fullPath;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+        b.append("Name:");
+        b.append(name);
+        b.append(",Mime:");
+        b.append(mimeType);
+        b.append(",size:");
+        b.append(size);
+        b.append(",ext:");
+        b.append(extension);
+        return b.toString();
+    }
+    
+    
 
     /**
      * @return the name

@@ -50,4 +50,12 @@ public class FileInfoTest {
         assertEquals(expResult, result);
     }
     
+    public void testSetGetFullPath() {
+        FileInfo instance = new FileInfo();
+        String expResult = "path";
+        instance.setFullPath(expResult);
+        String result = instance.getFullPath();
+        assertEquals(expResult, result);
+    }
+    
 }

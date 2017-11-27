@@ -49,6 +49,7 @@ public class ConfigurableFileInfoDao implements IFileInfoDao {
                 fileInfo.setSize(file.length());
                 fileInfo.setExtension(FilenameUtils.getExtension(file.getName()));
                 fileInfo.setMimeType(URLConnection.guessContentTypeFromName(file.getName()));
+                fileInfo.setFullPath(file.getAbsolutePath());
                 fileInfos.add(fileInfo);
             }
         } else {
