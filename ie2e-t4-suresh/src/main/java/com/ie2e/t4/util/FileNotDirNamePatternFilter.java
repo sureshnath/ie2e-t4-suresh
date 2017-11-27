@@ -14,6 +14,10 @@ import java.io.FilenameFilter;
  */
 public class FileNotDirNamePatternFilter implements FilenameFilter{
 
+    private static final String ALL_FILES_PATTERN = ".*";
+    private static final String EXCEL_FILES_PATTERN = ".*\\.(xlsx|xls)$";
+    private static final String CSV_FILES_PATTERN = ".*\\.csv$";
+    
     private final String pattern;
     
     public FileNotDirNamePatternFilter(String pattern){
@@ -26,12 +30,12 @@ public class FileNotDirNamePatternFilter implements FilenameFilter{
     }
     
     public static FileNotDirNamePatternFilter getAllFilesMatcher(){
-        return new FileNotDirNamePatternFilter(".*");
+        return new FileNotDirNamePatternFilter(ALL_FILES_PATTERN);
     }
     public static FileNotDirNamePatternFilter getExcelFilesMatcher(){
-        return new FileNotDirNamePatternFilter(".*\\.(xlsx|xls)$");
+        return new FileNotDirNamePatternFilter(EXCEL_FILES_PATTERN);
     }
     public static FileNotDirNamePatternFilter getCsvFilesMatcher(){
-        return new FileNotDirNamePatternFilter(".*\\.csv$");
+        return new FileNotDirNamePatternFilter(CSV_FILES_PATTERN);
     }
 }
