@@ -14,10 +14,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Test;
+
+import static io.github.bonigarcia.wdm.config.DriverManagerType.CHROME;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -66,9 +70,7 @@ public class VehicleRegSeleniumTest {
      */
     @BeforeClass
     public static void createAndStartService() throws Exception {
-        if (System.getProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY) == null) {
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, "D:\\Software\\java\\utils\\chromedriver_win32\\chromedriver.exe");
-        };
+        WebDriverManager.getInstance(CHROME).setup();
 
         service = new ChromeDriverService.Builder()
                 .usingAnyFreePort()
@@ -153,11 +155,11 @@ public class VehicleRegSeleniumTest {
         baseUrl = "https://www.gov.uk/";
         driver.get(baseUrl + "/get-vehicle-information-from-dvla");
         driver.findElement(By.linkText("Start now")).click();
-        driver.findElement(By.id("Vrm")).clear();
-        driver.findElement(By.id("Vrm")).sendKeys(reg);
-        driver.findElement(By.name("Continue")).click();
-        assertEquals(make.toUpperCase(), driver.findElement(By.xpath("//div[@id='pr3']/div/ul/li[2]/span[2]/strong")).getText());
-        assertEquals(color.toUpperCase(), driver.findElement(By.xpath("//div[@id='pr3']/div/ul/li[3]/span[2]/strong")).getText());
+        driver.findElement(By.id("wizard_vehicle_enquiry_capture_vrn_vrn")).clear();
+        driver.findElement(By.id("wizard_vehicle_enquiry_capture_vrn_vrn")).sendKeys(reg);
+        driver.findElement(By.id("submit_vrn_button")).click();
+        assertEquals(make.toUpperCase(), driver.findElement(By.xpath("//dt[text()='Make']/../dd")).getText());
+        assertEquals(color.toUpperCase(), driver.findElement(By.xpath("//dt[text()='Colour']/../dd")).getText());
 
     }
 
